@@ -1,0 +1,290 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Note-App!{% endblock %}
+
+{% block body %}
+<style>
+   
+   
+
+   .cadre-todo
+   {
+    background-color: #B0413E;
+     left: -50px;
+   }
+   .todo-container
+   {
+    position: absolute;
+    width: 430px;
+    height: 636px;
+    left: 864px;
+    top: 162px;
+
+   }
+   .background
+   {
+    width: 430px;
+    height: 202px;
+    left: 864px;
+    top: 162px;
+
+    border-radius: 10px 10px 0px 0px;
+   }
+
+   .day
+   {
+    position: absolute;
+    width: 104px;
+    height: 22px;
+    left: 317px;
+    top: 114px;
+    font-family: 'Russo One';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    color: #FFFFFF;
+
+   }
+
+   .date
+   {
+    position: absolute;
+    width: 192px;
+    height: 58px;
+    left: 210px;
+    top: 131px;
+    font-family: 'Russo One';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 48px;
+    line-height: 58px;
+    /* identical to box height */
+
+    color: #FFFFFF;
+
+   }
+   .note-cadre
+   {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px;
+    gap: 10px;
+
+    position: absolute;
+    width: 373px;
+    height: 49px;
+    left: 893px;
+    top: 387px;
+
+   }
+
+   .note-text-cadre 
+   {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px 12px;
+    gap: 10px;
+    width: 227px;
+    height: 27px;
+    background: cornflowerblue;
+    border-radius: 5px;
+    flex: none;
+      flex-grow: 0;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 1;
+    position: absolute;
+    left: -27px;
+    top: 1px;
+   }
+   .note-text 
+   {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    color: black;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    position: absolute;
+    border: none;
+    background: none;
+    outline: none;
+
+   }
+   .date-select
+   {
+       display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      padding: 10px;
+      gap: 11px;
+      isolation: isolate;
+      width: 126px;
+      height: 46px;
+      border-radius: 5px;
+      flex: none;
+        flex-grow: 0;
+      flex-grow: 0;
+      order: 1;
+      align-self: stretch;
+      flex-grow: 0;
+      position: absolute;
+      left: 229px;
+      top: 2px;
+      background: url('https://api.iconify.design/uil/angle-down.svg') no-repeat center center / contain;
+        background-color: rgba(0, 0, 0, 0);
+      background-color: rgba(0, 0, 0, 0);
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      background-color: #20EEB0;
+      border: 1px solid;
+      text-align: center;
+
+
+
+   }
+   .date-select-choice
+   {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      padding: 10px;
+      gap: 11px;
+      isolation: isolate;
+      width: 126px;
+      height: 46px;
+      border-radius: 5px;
+      flex: none;
+        flex-grow: 0;
+      flex-grow: 0;
+      flex-grow: 0;
+      order: 1;
+      align-self: stretch;
+      flex-grow: 0;
+      position: absolute;
+      left: 229px;
+      top: 2px;
+      background-color: rgba(0, 0, 0, 0);
+      background-color: rgba(0, 0, 0, 0);
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      background-color: #20EEB0;
+      border: 1px solid;
+      text-align: center;
+   }
+   .btn
+   {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    gap: 11px;
+    isolation: isolate;
+    width: 45px;
+    height: 46px;
+    background: #20EEB0;
+    border-radius: 5px;
+    flex: none;
+      flex-grow: 0;
+    flex-grow: 0;
+    order: 1;
+    align-self: stretch;
+    flex-grow: 0;
+    position: absolute;
+    left: 358px;
+    top: 2px;
+    border: 1px solid;
+    cursor:pointer
+   }
+   .btn-icon
+   {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 4px 15px;
+    gap: 10px;
+
+    width: 46px;
+    height: 24px;
+
+
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    z-index: 0;
+   }
+   
+</style>
+
+   
+  <div class="cadre-todo">
+     {% include "/components/header.html.twig" with{'jourDate':jourDate, 'heure':heure} %}
+      <div class="note-cadre">
+        <form action="{{path('edit_task', {'id':task.id})}}" method="post">
+              <div class="note-text-cadre">
+                <input type="text" name="titre" value="{{task.titre}}" class="note-text" id="titre">
+              </div>
+                <button type="submit" class="btn">
+                    <img src="{{asset('/image/ok.png')}}" alt="icon" style="position: absolute;">
+                 </button>
+                 <select name="jourDate" class="date-select-choice" id="selectChoice" onclick="onSelect()">
+                     <option>{{task.jourDate}}</option>
+                    {% for day in array_day %}
+                        <option value="{{day.first}}">{{day.first}}</option>
+                        <option value="{{day.second}}">{{day.second}}</option>
+                        <option value="{{day.third}}">{{day.third}}</option>
+                        <option value="{{day.fourth}}">{{day.fourth}}</option>
+                        <option value="{{day.fifth}}">{{day.fifth}}</option>
+                    {% endfor %}
+                 </select>
+          </form>
+      </div>
+
+      
+     
+
+  </div>
+
+</div>
+
+<script>
+
+
+
+ function onSelect()
+ {
+   var select= document.getElementById('selectChoice').value  
+
+
+   if(select.length !==0)
+   {
+      document.getElementById('selectChoice').className="date-select-choice"
+
+   }
+   
+   else
+   {
+      document.getElementById('selectChoice').className="date-select"
+
+   }
+
+
+   
+   
+ }
+
+ 
+
+  
+</script>
+{% endblock %}

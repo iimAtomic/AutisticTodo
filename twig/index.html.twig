@@ -1,0 +1,510 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Note-App!{% endblock %}
+
+{% block body %}
+<style>
+  
+   .cadre-todo
+   {
+     position: absolute;
+     left: -50px;
+   }
+   .todo-container
+   {
+    position: absolute;
+    width: 430px;
+    height: 636px;
+    left: 864px;
+    top: 162px;
+
+   }
+   .background
+   {
+    width: 430px;
+    height: 202px;
+    left: 864px;
+    top: 162px;
+
+    border-radius: 10px 10px 0px 0px;
+   }
+
+   .day
+   {
+    position: absolute;
+    width: 104px;
+    height: 22px;
+    left: 317px;
+    top: 114px;
+    font-family: 'Russo One';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    color: #FFFFFF;
+
+   }
+
+   .date
+   {
+    position: absolute;
+    width: 192px;
+    height: 58px;
+    left: 210px;
+    top: 131px;
+    font-family: 'Russo One';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 48px;
+    line-height: 58px;
+    /* identical to box height */
+
+    color: #FFFFFF;
+
+   }
+   .note-cadre
+   {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px;
+    gap: 10px;
+
+    position: absolute;
+    width: 373px;
+    height: 49px;
+    left: 893px;
+    top: 387px;
+
+   }
+
+   .note-text-cadre 
+   {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px 12px;
+    gap: 10px;
+    width: 227px;
+    height: 27px;
+    background: cornflowerblue;
+    border-radius: 5px;
+    flex: none;
+      flex-grow: 0;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 1;
+    position: absolute;
+    left: -27px;
+    top: 1px;
+   }
+   .note-text 
+   {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    color: black;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    position: absolute;
+    border: none;
+    background: none;
+    outline: none;
+
+   }
+   .date-select
+   {
+       display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      padding: 10px;
+      gap: 11px;
+      isolation: isolate;
+      width: 126px;
+      height: 46px;
+      border-radius: 5px;
+      flex: none;
+        flex-grow: 0;
+      flex-grow: 0;
+      order: 1;
+      align-self: stretch;
+      flex-grow: 0;
+      position: absolute;
+      left: 229px;
+      top: 2px;
+      background: url('https://api.iconify.design/uil/angle-down.svg') no-repeat center center / contain;
+        background-color: rgba(0, 0, 0, 0);
+      background-color: rgba(0, 0, 0, 0);
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      background-color: #20EEB0;
+      border: 1px solid;
+      text-align: center;
+
+
+
+   }
+   .date-select-choice
+   {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      padding: 10px;
+      gap: 11px;
+      isolation: isolate;
+      width: 126px;
+      height: 46px;
+      border-radius: 5px;
+      flex: none;
+        flex-grow: 0;
+      flex-grow: 0;
+      flex-grow: 0;
+      order: 1;
+      align-self: stretch;
+      flex-grow: 0;
+      position: absolute;
+      left: 229px;
+      top: 2px;
+      background-color: rgba(0, 0, 0, 0);
+      background-color: rgba(0, 0, 0, 0);
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      background-color: #20EEB0;
+      border: 1px solid;
+      text-align: center;
+   }
+   .btn
+   {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    gap: 11px;
+    isolation: isolate;
+    width: 45px;
+    height: 46px;
+    background: #20EEB0;
+    border-radius: 5px;
+    flex: none;
+      flex-grow: 0;
+    flex-grow: 0;
+    order: 1;
+    align-self: stretch;
+    flex-grow: 0;
+    position: absolute;
+    left: 358px;
+    top: 2px;
+    border: 1px solid;
+    cursor:pointer
+   }
+   .btn-icon
+   {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 4px 15px;
+    gap: 10px;
+
+    width: 46px;
+    height: 24px;
+
+
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    z-index: 0;
+   }
+   .note-list
+   {
+    position: absolute;
+    width: 373px;
+    height: 248px;
+    /*left: 893px;
+    top: 472px;*/
+   }
+
+   .note-list-list
+   {
+     position: relative;
+     display: flex;
+     flex-direction: column;
+     justify-content: space-between;
+     margin: 10;
+     bottom: 5px;
+   }
+
+   .note-box
+   {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px;
+    gap: 194px;
+    position: relative;
+    width: 373px;
+    height: 44px;
+    left: 896px;
+    top: 472px;
+    border: 1px solid green;
+    border-radius: 10px;
+    text-align: center;
+    top: 472px;
+    margin: 10px;
+   }
+
+   .note-text-bloc
+   {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 5px;
+
+    width: 117px;
+    height: 44px;
+
+
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+   }
+   .note-text-text
+   {
+    height: 22px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    color: #0D0D0D;
+    flex: none;
+      flex-grow: 0;
+    flex-grow: 0;
+    order: 0;
+    flex-grow: 0;
+    position: absolute;
+    top: 1px;
+    left: 16px;
+   }
+   .note-text-date
+   {
+      height: 17px;
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 17px;
+      color: #888888;
+      flex: none;
+        flex-grow: 0;
+      flex-grow: 0;
+      order: 1;
+      flex-grow: 0;
+      position: absolute;
+      left: 17px;
+      top: 25px;
+   }
+
+
+   .note-text-bloc-icon
+   {
+    width: 62px;
+    height: 24px;
+
+
+    /* Inside auto layout */
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+   }
+   .edit-icon
+   {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    left: 311px;
+    top: 10px;
+    cursor:pointer;
+
+   }
+
+   .delete-icon
+   {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    left: 343px;
+    top: 10px;
+    cursor:pointer;
+
+   }
+</style>
+
+  
+
+   
+  <div class="cadre-todo">
+       
+      <div class="todo-container">
+
+       <img src="{{asset('/image/background.png')}}" alt="background" class="background">
+
+       <span class="day">Thur 9</span>
+
+       <span class="date">6:23 AM</span>
+
+      </div>
+
+      <div class="note-cadre">
+
+        <form action="">
+              <div class="note-text-cadre">
+                <input type="text" name="text" value="" class="note-text">
+              </div>
+           
+              
+                <button type="submit" class="btn">
+                    <img src="{{asset('/image/plus.png')}}" alt="icon">
+                 </button>
+
+                 <select name="date" class="date-select" id="selectChoice" onchange="onSelect()">
+                    <option></option>
+                     <option value="Monday">Monday</option>
+                     <option value="Tuesday">Tuesday</option>
+                     <option value="Wednesday">Wednesday</option>
+                 </select>
+
+                 
+              
+            
+  
+          </form>
+      </div>
+
+      <div class="note-list">
+
+   
+          <div class="note-list-list">
+
+              <div class="note-box">
+
+                <div class="note-text-bloc">
+                  <span class="note-text-text">Dinner</span>
+                  <span class="note-text-date">Today at 8:00 PM</span>
+                </div>
+    
+                <div class="note-text-icon-bloc">
+    
+                  <img src="{{asset('/image/edit.png')}}" alt="editIcon" class="edit-icon">
+    
+    
+                  <img src="{{asset('/image/delete.png')}}" alt="deleteIcon" class="delete-icon">
+    
+    
+                </div>
+    
+              </div>
+    
+              <div class="note-box">
+    
+              <div class="note-text-bloc">
+                <span class="note-text-text">Dinner</span>
+                <span class="note-text-date">Today at 8:00 PM</span>
+              </div>
+    
+              <div class="note-text-icon-bloc">
+    
+                <img src="{{asset('/image/edit.png')}}" alt="editIcon" class="edit-icon">
+    
+    
+                <img src="{{asset('/image/delete.png')}}" alt="deleteIcon" class="delete-icon">
+    
+    
+              </div>
+    
+              </div>
+
+              <div class="note-box">
+    
+                <div class="note-text-bloc">
+                  <span class="note-text-text">Dinner</span>
+                  <span class="note-text-date">Today at 8:00 PM</span>
+                </div>
+      
+                <div class="note-text-icon-bloc">
+      
+                  <img src="{{asset('/image/edit.png')}}" alt="editIcon" class="edit-icon">
+      
+      
+                  <img src="{{asset('/image/delete.png')}}" alt="deleteIcon" class="delete-icon">
+      
+      
+                </div>
+      
+              </div>
+
+              <div class="note-box">
+    
+                <div class="note-text-bloc">
+                  <span class="note-text-text">Dinner</span>
+                  <span class="note-text-date">Today at 8:00 PM</span>
+                </div>
+      
+                <div class="note-text-icon-bloc">
+      
+                  <img src="{{asset('/image/edit.png')}}" alt="editIcon" class="edit-icon">
+      
+      
+                  <img src="{{asset('/image/delete.png')}}" alt="deleteIcon" class="delete-icon">
+      
+      
+                </div>
+      
+              </div>
+
+          </div>
+      
+
+      </div>
+
+  </div>
+
+
+
+
+<script>
+
+  function onSelect()
+ {
+   var select= document.getElementById('selectChoice').value  
+
+
+   if(select.length !==0)
+   {
+      document.getElementById('selectChoice').className="date-select-choice"
+
+   }
+   
+   else
+   {
+      document.getElementById('selectChoice').className="date-select"
+
+   }
+
+
+   
+   
+ }
+  
+</script>
+{% endblock %}

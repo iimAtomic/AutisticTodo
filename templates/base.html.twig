@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+        <style>
+            *{
+                padding: 0;
+                margin: 0;
+            }
+
+            body{
+                background-color: #222222;
+            }
+
+             .cadre
+            {   position: relative;
+                width: 1600px;
+                height: 960px;
+                overflow-x:hidden;
+            }
+
+            .name
+            {
+                position: absolute;
+                width: 636px;
+                height: 116px;
+                font-family:  'Monospaced','Inter', serif;
+                font-style: normal;
+                font-weight: 700;
+                font-size: 66px;
+                line-height: 116px;
+                color: #007FDB;
+            }
+        </style>
+        <script src="//unpkg.com/alpinejs" defer></script>
+    </head>
+    <body>
+        <div class="cadre">
+           <div class="cadre-name">
+            <span class="name">AUTISTIC PRIME</span>
+            </div>
+           {% block body %}{% endblock %}
+           {% include "/components/flash-message.html.twig" %}
+        </div>
+    </body>
+</html>
+

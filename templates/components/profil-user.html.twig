@@ -1,0 +1,41 @@
+<style>
+
+.profil
+    {
+    position: absolute;
+    width: 1000px;
+    height: 116px;
+    left: 975px;
+    top: 30px;
+    font-family: 'Inter', serif;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 36px;
+    line-height: 116px;
+    color: coral;
+    }
+
+.avatar
+{
+    position: absolute;
+    width: 600px;
+    height: 116px;
+    left: 900px;
+    top: 2px;
+    font-family: 'Inter', serif;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 36px;
+    line-height: 116px;
+    transform: scale(0.1);}
+</style>
+
+
+<div class="container-profil">
+        <span class="profil">
+         Salut {{ app.user.nom }}
+        </span>
+        <a href="{{path('app_logout')}}" class="avatar">
+            <img src="{{asset('/image/profil.png')}}" alt="profil" >
+        </a>
+</div>
